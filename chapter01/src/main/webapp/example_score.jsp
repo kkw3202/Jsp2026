@@ -1,0 +1,59 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	table{
+		margin: 100px auto;
+	}
+	div{
+		border: 5px solid blue; 
+		margin-right: 10px;
+	}
+	tr.fail{
+		background-color: #ffcccc;
+	}
+</style>
+</head>
+<body>
+	<%! 
+	String[] names = {"김철수", "이영희", "박민수", "최지우", "정다은"};
+	int[] scores = {92, 78, 55, 85, 67};
+	%>
+	<table border="1px">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>이름</th>
+				<th>점수</th>
+				<th>등급</th>
+				<th>그래프</th>
+			</tr>
+		</thead>
+		<tbody>
+		<%! public char getGrade(int score){
+			return (score >= 90 ?  'A' :
+						score >= 80 ? 'B' : 
+							score >= 70 ? 'C' : 
+								score >= 60 ? 'D' : 'F');
+		}
+		 %>
+			<% 
+			for(int i = 0; i<names.length; i++){
+				if(scores[i] < 60) out.print("<tr class='fail'>");
+				else out.print("<tr>");
+					out.print("<td>"+(i+1)+"</td>");
+					out.print("<td>"+names[i]+"</td>");
+					out.print("<td>"+scores[i]+"</td>");
+					out.print("<td>"+ getGrade(scores[i]) +"</td>");
+					out.print("<td><div style='width:" + scores[i]*3 + "px'" + "></div></td>");
+				out.print("</tr>");
+			}
+			%>
+		</tbody>
+	</table>
+</body>
+</html>

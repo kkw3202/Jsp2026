@@ -1,0 +1,57 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	*{
+		box-sizing: border-box;
+	}
+</style>
+</head>
+<body>
+	<%! 
+	int[] winNums = {3, 12, 19, 27, 33, 41};
+	public boolean isWinning(int num){
+		
+		boolean result = false;
+		
+		for(int a : winNums){
+			if(a == num) result = true;
+		}
+		
+		return result;
+	}
+	%>
+	<table style="margin: 100px auto 10px auto; text-align: center; border-collapse: collapse; border: 1px solid #222;" >
+		<tbody>			
+		<% 
+		int numPrt = 0;
+		for(int i = 0; i<5; i++){
+			out.print("<tr>");
+			for(int j = 0; j<9; j++){
+				numPrt++;
+		%>	
+				<td style="border:1px solid #222; width: 25px; background-color: 
+				<%= isWinning(numPrt) ? "gold; font-weight: bold" : "inherit"%>">
+				<%= numPrt %></td>
+		<%		
+			}
+			out.print("</tr>");
+		}
+		%>
+		</tbody>
+	</table>
+	<p style="display:block; margin: 0px auto; width: 220px;">당첨번호: 
+	<% 
+	for(int i =0; i<winNums.length; i++) {
+		out.print(winNums[i]); if(i!=winNums.length-1) out.print(", ");
+	}
+	%></p>
+	<script type="text/javascript">
+	let a = doc
+	</script>
+</body>
+</html>

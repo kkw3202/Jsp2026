@@ -1,0 +1,52 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 스타일 삽입 양식 : style='background-color: ' -->
+	<table style="margin: 0 auto" border="1px">
+		<thead>
+			<tr>
+				<th>숫자</th>
+				<th>제곱</th>
+				<th>구분</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% 
+			
+			for(int i = 1; i<=20; i++){
+				boolean isOdd = false;
+				if(i%2 == 0) isOdd=true;
+				
+				boolean is3 = false;
+				if(i%3 == 0) is3=true;
+			%>	
+				<%= "<tr style='background-color:" %>
+				<%= !isOdd ? " #ffffff'>" : 
+							 " #e6f2ff'>" %>
+				<%= "<td>" %>
+				<% 
+				if(is3) out.print("<b>" + i + "</b>");
+				else out.print(i);
+				%>
+				<%= "</td>" %>
+				<%= "<td>" + i*i + "</td>" %>
+				<%= "<td>"%>
+				<% if(isOdd)%><%="짝수" %>
+				<% if(!isOdd)%><%="홀수" %>
+				<%= "</td>" %>
+				<%= "</tr>" %>
+				
+			<% } %>
+			
+			
+
+		</tbody>
+	</table>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입 처리</title>
+</head>
+<body>
+	<% 
+	request.setCharacterEncoding("UTF-8"); 
+	// requestJoin.jsp에 입력된 정보를 Request객체를 통해 정보를 꺼내오시오.
+	%>
+	
+	<%
+	String id = request.getParameter("id");
+	String pass = request.getParameter("pass");
+	String passchk = request.getParameter("passchk");
+	String email = request.getParameter("email");
+	String tel = request.getParameter("tel");
+	String[] hobby = request.getParameterValues("hobby");
+	String job = request.getParameter("job");
+	String age = request.getParameter("age");
+	String info = request.getParameter("info");
+	
+	String prtHobby = "";
+	boolean prtOk = false;
+	%>
+	
+	<%! String msg =""; %>
+	
+	<%
+	// 예외처리
+	if(id == null || id.isEmpty()) msg = "아이디를 입력하세요";
+	else if(pass == null || pass.isEmpty()) msg = "비밀번호를 입력하세요";
+	else if(passchk == null || passchk.isEmpty()) msg = "비밀번호 확인을 입력하세요"; 
+	else if(email == null || email.isEmpty()) msg = "이메일을 입력하세요"; 
+	else if(tel == null || tel.isEmpty()) msg = "전화번호를 입력하세요"; 
+	else if(hobby == null || hobby.length == 0) msg = "취미를 입력하세요"; 
+	else if(job == null || job.isEmpty()) msg = "직업을 입력하세요"; 
+	else if(age == null || age.isEmpty()) msg = "나이를 입력하세요"; 
+	else if(info == null || info.isEmpty()) msg = "남기는 말을 입력하세요";
+	else{
+		for(String a : hobby)prtHobby += a + " ";
+		if(!pass.equals(passchk)){
+			msg = "비밀번호가 일치하지 않습니다.";
+		}else prtOk = true;
+	
+		String prtAllRight = "<table><tr><th>아이디</th><td>" + id + "</td></tr><tr><th>이메일</th><td>" + email + "</td></tr><tr><th>전화번호</th><td>" + 
+				tel + "</td></tr><tr><th>취미</th><td>" + prtHobby + "</td></tr><tr><th>직업</th><td>" + job + "</td></tr><tr><th>나이</th><td>" +
+				age + "</td></tr><tr><th>남기는 말</th><td>" + info + "</td></tr></tbody></table>";
+				
+		if(prtOk) out.print(prtAllRight);
+	}
+	%>
+
+	<script type="text/javascript">
+		alert("<%= msg %>");
+		history.go(-1);
+	</script>
+	<!-- 
+		자바 스크립트의 객체 3종류 : 코어, DOM, BOM
+		
+		BOM 객체? 브라우저가 사용하는 객체
+		
+		history 객체는 브라우저가 현재 탭이나 창에서 방문했던 웹페이지들의 기록(세션 히스토리)을 관리하고 제어하는 객체.
+		* history 객체의 메소드 종류
+			- history.back() : 바로 이전페이지로 이동(=뒤로 가기)
+			- history.forword() : 바로 다음페이지로 이동(=앞으로 가기)
+			- history.go(n) : 지정한 상대 위치로 이동. (n > 0 : 절댓값만큼 앞으로가기; n == 0 : 현재페이지; n < 0 : 절댓값만큼 뒤로가기; 
+	 -->
+</body>
+</html>

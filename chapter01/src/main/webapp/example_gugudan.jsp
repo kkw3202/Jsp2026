@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+		table{
+			margin: 100px auto;
+		}
+</style>
+</head>
+<body>
+	<table border="1px">
+		<thead>
+			<tr>
+				<%
+					for(int i = 2; i<10; i++){
+						out.print("<th>" + i + "단</th>");
+					}
+				
+				%>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+				for (int i = 1; i < 10; i++) {
+					out.print("<tr>");
+					for (int j = 2; j < 10; j++){
+						out.print("<td>" + i + " X " + j + " = " + i*j + "</td>");
+					}
+					out.print("</tr>");
+				}
+			%>
+		</tbody>
+	</table>
+</body>
+</html>

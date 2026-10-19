@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 구구단 2~9단 모두 출력 -->
+	<% 
+		int row = 2;
+		int prt = 0;
+		for(int i = row; i<10; i++){
+			for(int j = 1; j<10; j++){
+				prt = row*j;
+	%>
+		<p><%if(row==2){ %><%= row + " * " + j + " = " + prt%><% } %></p>
+		<p><%if(row==3){ %><%= row + " * " + j + " = " + prt %><% } %></p>
+		<p><%if(row==4){ %><%= row + " * " + j + " = " + prt %><% } %></p>
+		<p><%if(row==5){ %><%= row + " * " + j + " = " + prt %><% } %></p>
+		<p><%if(row==6){ %><%= row + " * " + j + " = " + prt %><% } %></p>
+		<p><%if(row==7){ %><%= row + " * " + j + " = " + prt %><% } %></p>
+		<p><%if(row==8){ %><%= row + " * " + j + " = " + prt %><% } %></p>
+		<p><%if(row==9){ %><%= row + " * " + j + " = " + prt %><% } %></p>
+	<% 		
+			}
+			row++;
+		}
+	%>
+</body>
+</html>
