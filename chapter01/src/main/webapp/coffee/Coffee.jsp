@@ -12,17 +12,17 @@
 		<form action="CoffeeProc.jsp" method="get">
 			<div class="menus_wrap">
 				<input type="radio" value="아메리카노" id="americano" name="menu">
-				<label id="americano">아메리카노 (3000원)</label>
+				<label for="americano">아메리카노 (3000원)</label>
 				<input type="radio" value="카페라떼" id="cafelatte" name="menu">
-				<label id="cafelatte">카페라떼 (3300원)</label>
+				<label for="cafelatte">카페라떼 (3300원)</label>
 				<input type="radio" value="에스프레소" id="esspresso" name="menu">
-				<label id="esspresso">에스프레소 (2500원)</label>
+				<label for="esspresso">에스프레소 (2500원)</label>
 				<input type="radio" value="얼그레이티" id="algray" name="menu">
-				<label id="algray">얼그레이티 (3500원)</label>
+				<label for="algray">얼그레이티 (3500원)</label>
 			</div>
 			<div class="count_wrap">
 				<label for="count">수량 : </label>
-				<input type="text" placeholder="수량을 입력하세요" name="count" id="count">
+				<input type="number" placeholder="수량을 입력하세요" name="count" id="count">
 			</div>
 			<div class="pay_wrap">
 				<label for="pay">입금액 : </label>
