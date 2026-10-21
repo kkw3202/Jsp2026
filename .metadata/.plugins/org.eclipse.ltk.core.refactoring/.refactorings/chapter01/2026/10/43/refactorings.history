@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move &apos;RequestJoinProc.jsp&apos; to &apos;Request&apos;" description="Move &apos;RequestJoinProc.jsp&apos; to &apos;Request&apos;" destination="src/main/webapp/Request" element1="src/main/webapp/RequestJoinProc.jsp" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1792393566451" updateReferences="true"/>
-</session>
