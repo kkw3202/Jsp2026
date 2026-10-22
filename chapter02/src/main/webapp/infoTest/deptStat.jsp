@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
 <%@ page import="java.sql.*" %>
-<%@page import="java.text.DecimalFormat"%>
-
+<%@page import="java.text.*"%>
+<h3>(부서별)주행통계</h3>
 <table class="list">
 	    <tr>
 	    	<th>부서코드</th>
@@ -24,9 +24,23 @@
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 			
-			String sql = "";
+			String sql = "select de.DEPT_CODE DEPT_CODE, de.DEPT_NAME DEPT_NAME, SUM(dr.DRV_END-dr.DRV_START) total_km, SUM(DRV_MONEY) total_money from TBL_DEPT de inner join TBL_DRIVE dr on dr.DEPT_CODE = de.DEPT_CODE group by de.DEPT_CODE";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			
+			DecimalFormat de = new DecimalFormat("￦#,##0");
+			
+			
+			
+			while(rs.next()){
+				out.print("<tr>");
+				out.print("<td>" + rs.getString("DEPT_CODE") + "</td>");
+				out.print("<td>" + rs.getString("DEPT_NAME") + "</td>");
+				out.print("<td>" + rs.getString("total_km") + "</td>");
+				int money = Integer.parseInt(rs.getString("total_money"));
+				out.print("<td>" + de.format(money) + "</td>");
+				out.print("</tr>");
+			}
 			
 		}catch(Exception e){
 			e.printStackTrace();

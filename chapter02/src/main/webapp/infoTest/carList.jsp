@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
 <%@page import="java.sql.*"%>
+<%@page import="java.text.*"%>
+<%@page import="java.util.Date"%>
+<h3>차량조회</h3>
     <table class="list">
     <tr>
     	<th>차량번호</th>
@@ -26,18 +29,27 @@
 		pstmt = con.prepareStatement(sql);
 		rs = pstmt.executeQuery();
 		
-		while(rs.next()){
+		SimpleDateFormat simpleDate = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat prtDate = new SimpleDateFormat("yyyy년MM월dd일");
+		
+		while(rs.next()){ // 다음 항목이 있으면 true, 없으면 false 반환 => while로 돌리면 있는만큼 실행
 			out.print("<tr>");
 			out.print("<td>"+rs.getString("CAR_NO")+"</td>");
 			out.print("<td>"+rs.getString("CAR_MODEL")+"</td>");
 			out.print("<td>"+rs.getString("CAR_COMPANY")+"</td>");
-			out.print("<td>"+rs.getString("CAR_DATE")+"</td>");
+			
+			// format()은 Date 형식, DB 는 String => parse()해야 사용 가능 
+			// => "20230101" => 20230101 Date 객체로 바뀜
+			// format() => 20230101 Date 객체 => 2023년01월01일
+			Date date = simpleDate.parse(rs.getString("CAR_DATE"));
+			
+			out.print("<td>"+ prtDate.format(date) +"</td>");
 			out.print("</tr>");
 		}
-		
-		
 	}catch(Exception e){
 		e.printStackTrace();
+		// 제출 시에 지워야 할 DB 연동 오류 문구
+		out.print("DB 연결 실패");
 	}finally{
 		if(con != null){
 			try {con.close();}

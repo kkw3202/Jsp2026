@@ -20,12 +20,12 @@ body {
 /* header */
 header {
     height: 100px;
-    background-color: red;
-    color: black;
+    background-color: #ccc;
+    color: #fff;
     text-align: center;
     line-height: 100px;
 }
-header h2 { font-size: 24px; }
+h2 { font-size: 24px; }
 
 /* nav */
 nav {
@@ -84,8 +84,8 @@ table.form .hint { margin-left: 6px; }
 /* footer */
 footer {
     height: 70px;
-    background-color: red;
-    color: black;
+    background-color: #ccc;
+    color: #fff;
     text-align: center;
     line-height: 70px;
     font-size: 13px;

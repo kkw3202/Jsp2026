@@ -1,8 +1,12 @@
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
 <%@ page import="java.sql.*" %>
-    
+<%@ include file="db_conn.jsp" %>
+    <h3>주행내역조회</h3>
 	<table class="list">
 	    <tr>
 	    	<th>주행일자</th>
@@ -13,32 +17,32 @@
 	    	<th>부서명</th>
 	    	<th>주유금액</th>
 	    </tr>
-	    <%
-	    Connection con = null;
-	    PreparedStatement pstmt = null;
-	    ResultSet rs = null;
-	    
-	    String driver = "com.mysql.cj.jdbc.Driver"; // jdbc 드라이버
-		String url = "jdbc:mysql://localhost:3306/jspdb?serverTimezone=UTC&useSSL=false"; // DB URL(스키마 이름 : jspdb)
-		String user = "root"; // DB 계정
-		String password = "1234"; // DB 계정의 비밀번호	
-		
+	    <%	
 		try{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 			
-			String sql = "select dr.DRV_DATE as DRV_DATE, dr.CAR_NO as CAR_NO, ca.CAR_MODEL as CAR_MODEL, dr.DRV_START as DRV_START, dr.DRV_END as DRV_END, de.DEPT_NAME as DEPT_NAME, dr.DRV_MONEY as DRV_MONEY from TBL_DRIVE dr inner join TBL_CAR ca on ca.CAR_NO = dr.CAR_NO inner join TBL_DEPT de on de.DEPT_CODE = dr.DEPT_CODE";
+			// String sql = "select dr.DRV_DATE as DRV_DATE, dr.CAR_NO as CAR_NO, ca.CAR_MODEL as CAR_MODEL, dr.DRV_START as DRV_START, dr.DRV_END as DRV_END, de.DEPT_NAME as DEPT_NAME, dr.DRV_MONEY as DRV_MONEY from TBL_DRIVE dr inner join TBL_CAR ca on ca.CAR_NO = dr.CAR_NO inner join TBL_DEPT de on de.DEPT_CODE = dr.DEPT_CODE order by ca.CAR_NO asc";
+			String sql = "select dr.DRV_DATE as DRV_DATE, dr.CAR_NO as CAR_NO, ca.CAR_MODEL as CAR_MODEL, dr.DRV_START as DRV_START, dr.DRV_END as DRV_END, de.DEPT_NAME as DEPT_NAME, dr.DRV_MONEY as DRV_MONEY "
+						+ "from TBL_DRIVE dr "
+						+ "inner join TBL_CAR ca on ca.CAR_NO = dr.CAR_NO "
+						+ "inner join TBL_DEPT de on de.DEPT_CODE = dr.DEPT_CODE "
+						+ "order by ca.CAR_NO asc";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			DecimalFormat de = new DecimalFormat("#,##0");
-			
-			
+			SimpleDateFormat simpleDate = new SimpleDateFormat("yyyyMMdd");
+			SimpleDateFormat prtDate = new SimpleDateFormat("yyyy년MM월dd일");
 			
 			
 			while(rs.next()){
 				out.print("<tr>");
-				out.print("<td>" + rs.getString("DRV_DATE") + "</td>");
+				
+				Date date = simpleDate.parse(rs.getString("DRV_DATE"));
+				
+				out.print("<td>" + prtDate.format(date) + "</td>");
+				
 				out.print("<td>" + rs.getString("CAR_NO") + "</td>");
 				out.print("<td>" + rs.getString("CAR_MODEL") + "</td>");
 				
