@@ -27,6 +27,7 @@
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 			
+			// distinct 
 			String sql = "select ca.CAR_COMPANY CAR_COMPANY, count(distinct ca.CAR_NO) count, sum(dr.DRV_END - dr.DRV_START) sum_move, sum(dr.DRV_MONEY) sum_money "
 						+ "from TBL_CAR ca "
 						+ "inner join TBL_DRIVE dr on ca.CAR_NO = dr.CAR_NO "

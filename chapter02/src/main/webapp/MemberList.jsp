@@ -68,7 +68,8 @@
 					out.print("<td>"+rs.getString("age")+"</td>");
 					out.print("<td>"+rs.getString("info")+"</td>");
 					//get 방식으로 a 태그의 링크가 넘어가는 곳으로 id의 정보를 떠넘김.
-					out.print("<td><a href='MemberDetail.jsp?id="+rs.getString("id")+"'>상세보기</a></td>");  
+					// out.print("<td><a href='MemberDetail.jsp?id="+rs.getString("id")+"'>상세보기</a></td>");  
+					out.print("<td><a href='main.jsp?id="+rs.getString("id")+"&page=MemberDetail'>상세보기</a></td>");  
 					out.print("</tr>");
 					tableMakeCnt++;
 				}
@@ -96,6 +97,6 @@
 			%>
 		</tbody>
 	</table>
-	<a href="MemberJoin.jsp">회원가입으로 돌아가기</a>
+	<a href="main.jsp?page=MemberJoin">회원가입으로 돌아가기</a>
 </body>
 </html>

@@ -5,6 +5,8 @@
 <%@ page import="java.sql.*" %>
 
 		<% 
+		request.setCharacterEncoding("UTF-8");
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -22,6 +24,7 @@
 		<!-- input을 hidden으로 주고, name="page" value="carDrive" 로 index.jsp?page="carDrive" 로 이동하게 함 -->
 		<input type="hidden" name="page" value="carDrive">
 		<select name="sel" style="height: 50px; font-size: 20px; padding: 5px;">
+			<!-- 태그 안에 3항 연산자 사용해서 글 적어 넣을 수 있는 점 잊지 않기 -->
 			<option <%=sel==null ? "selected='seleceted'" : "disabled='disabled'" %>>차량선택</option>
 			<option value="10가0001" <%="10가0001".equals(sel) ? "selected='seleceted'" : "" %>>[10가0001] 소나타</option>
 			<option value="10가0002" <%="10가0002".equals(sel) ? "selected='seleceted'" : "" %>>[10가0002] K5</option>
@@ -47,7 +50,7 @@
 			con = DriverManager.getConnection(url, user, password);
 			
 			
-			String sql = "select dr.CAR_NO CAR_NO, dr.DRV_DATE DRV_DATE, dr.DRV_START DRV_START, dr.DRV_END DRV_END, (dr.DRV_END - dr.DRV_START) total_run, de.DEPT_NAME DEPT_NAME, dr.DRV_MONEY DRV_MONEY "
+			String sql = "select dr.DRV_DATE DRV_DATE, dr.DRV_START DRV_START, dr.DRV_END DRV_END, (dr.DRV_END - dr.DRV_START) total_run, de.DEPT_NAME DEPT_NAME, dr.DRV_MONEY DRV_MONEY "
 						+ "from TBL_DRIVE dr "
 						+ "inner join TBL_DEPT de on dr.DEPT_CODE = de.DEPT_CODE ";
 			if(sel!=null){
@@ -92,11 +95,10 @@
 				catch(Exception e){}
 			}
 		}
-		
 		%>
 	</table>
 	
-	<script>
+	<script type="text/javascript">
 		function search(){
 			let f = document.form;
 			f.submit();
