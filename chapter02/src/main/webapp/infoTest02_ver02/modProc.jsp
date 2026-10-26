@@ -5,8 +5,9 @@
 	<%@ include file="db_conn.jsp"  %>
 	<%
 		request.setCharacterEncoding("UTF-8");
-	
-		String CUSTNO = request.getParameter("CUSTNO2");
+		
+		/* DB와 데이터 타입 맞추기!! (request 혹은 set~ 에서 맞추기) */
+		String CUSTNO = request.getParameter("CUSTNO");
 		String CUSTNAME = request.getParameter("CUSTNAME");
 		String PHONE = request.getParameter("PHONE");
 		String ADDRESS = request.getParameter("ADDRESS");
@@ -14,12 +15,13 @@
 		String GRADE = request.getParameter("GRADE");
 		String CITY = request.getParameter("CITY");
 		String msg = "";
+		int result = 0;
 	
 		try{
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, user, password);
 			
-			String sql = "update member_tbl_02 set CUSTNAME=?,PHONE=?,ADDRESS=?,JOINDATE=?,GRADE=?,CITY=? where CUSTNO =?";
+			String sql = "UPDATE member_tbl_02 SET CUSTNAME=?, PHONE=?, ADDRESS=?, JOINDATE=?, GRADE=?, CITY=? WHERE CUSTNO=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, CUSTNAME);
 			pstmt.setString(2, PHONE);
@@ -27,9 +29,9 @@
 			pstmt.setString(4, JOINDATE);
 			pstmt.setString(5, GRADE);
 			pstmt.setString(6, CITY);
-			pstmt.setString(7, CUSTNO);
+			pstmt.setInt(7, Integer.parseInt(CUSTNO));
 			
-			int result = pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 			
 			if(result > 0 ){
 				msg = "회원정보 수정이 완료되었습니다!";
@@ -47,14 +49,12 @@
 			}catch(Exception e) {e.printStackTrace();}
 		}
 	%>
-	
 	<script type="text/javascript">
 		alert("<%=msg%>");
-		location.href="index.jsp?page=memberForm";
+		if(<%=result%> > 0){
+			location.href="memberForm.jsp";			
+		}else{
+			history.go(-1);
+		}
 	</script>
 	
-	
-	
-	
-	
-	=

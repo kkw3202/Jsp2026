@@ -27,7 +27,7 @@
 			pstmt.setString(4, JOINDATE);
 			pstmt.setString(5, GRADE);
 			pstmt.setString(6, CITY);
-			pstmt.setString(7, CUSTNO);
+			pstmt.setInt(7, Integer.parseInt(CUSTNO));
 			
 			int result = pstmt.executeUpdate();
 			
