@@ -30,12 +30,43 @@ public class MemberListCon extends HttpServlet {
 		// 회원 여러명의 자료를 화면에 출력하기 위해 DB에서 select 로 꺼내온다. => 자료가 몇 개 나올지 확실하지않음 => ArrayList에 담아야 함.
 		
 		MemberDAO mdao = new MemberDAO();
-		ArrayList<MemberDTO> allMember = mdao.getAllMember(); 
+		String searchType = request.getParameter("searchType");
+		String keyword = request.getParameter("keyword");
 		
-		request.setAttribute("allMember", allMember);
+		
+		if("all".equals(searchType) || searchType == null) {
+			
+			ArrayList<MemberDTO> allMember = mdao.getAllMember(); 
+			request.setAttribute("allMember", allMember);
+			
+		}else {
+			
+			ArrayList<MemberDTO> searchedMember = mdao.getSearchMember(searchType, keyword);
+			String msg ="";
+			
+			if(searchedMember.isEmpty()) {
+				
+				msg = "검색된 자료가 없습니다.";
+				request.setAttribute("msg", msg);
+				request.setAttribute("isMsg", true);
+				
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=member/MemberList.jsp");
+				rd.forward(request, response);
+				return;
+			}
+			
+			request.setAttribute("allMember", searchedMember);
+			request.setAttribute("searchType", searchType);
+			request.setAttribute("keyword", keyword);
+
+		}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?section=member/MemberList.jsp");
 		rd.forward(request, response);
+		
+		
+		
+		
 	}
 
 }

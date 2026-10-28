@@ -73,7 +73,11 @@ public class MemberJoinProc extends HttpServlet {
 			
 			// 회원 전체 목록 리스트로 이동 (MemberList)
 			// MemberJoinProc 컨트롤러 => MemberListCon.do 컨트롤러로 이동
-			link = "/MemberListCon.do";
+			// jsp에서 DB가 수정되는 쿼리는 forward가 아닌, sendRedirect 로 내보내야함.
+				// forward는 select처럼 단순히 긁어오는 내용을 출력 할 때만 사용. 
+					// forward가 새로고침 시 원래 요청을 재전송 하기 때문
+					// sendRedirect는 이동한 "주소만" 재요청. && response의 매소드! && / 없이 매핑!
+			link = "index.jsp";
 		}
 		// 예외처리 pass != passChk => 비밀번호를 확인하세요
 		else {
@@ -81,6 +85,12 @@ public class MemberJoinProc extends HttpServlet {
 			link = "/member/joinerr.jsp";
 		}
 		RequestDispatcher rd = request.getRequestDispatcher(link);
-		rd.forward(request, response);
+		
+		
+		if(!link.equals("index.jsp")) rd.forward(request, response); // 새로고침하면 다시 실행됨.
+		else {
+			response.sendRedirect(link);
+			
+		}
 	}
 }
