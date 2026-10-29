@@ -22,6 +22,7 @@ public class MemberDAO {
 			con = Util.getConnection();
 			
 			sql = "select id from member where id=?";
+			// ? => db 에 들어가는 "값". 칼럼명이나 테이블 명, 일부 단어만 자르는 검색어 등은 들어 갈 수 없음
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			

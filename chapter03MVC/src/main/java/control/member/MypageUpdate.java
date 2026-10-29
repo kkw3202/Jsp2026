@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Response;
+
 import model.member.MemberDAO;
 import model.member.MemberDTO;
 
@@ -34,13 +36,21 @@ public class MypageUpdate extends HttpServlet {
 		
 		
 		String id = (String) session.getAttribute("id");
+		// Mypage.jsp 의 hidden 에서 getparaMeter() 로 받아와도 됨!
+		String id02 = request.getParameter("id");
+		
+		
 		String dbPass = mdao.getPass(id);
 		String pass = request.getParameter("pass");
 		String passchk = request.getParameter("passchk");
 		
 		
 		if(!pass.equals(passchk)) {
-			msg = "비밀번호를 확인해주세요";
+			// 수정 하지않고 메시지 출력
+			// Mypage.do 서블릿에 result=passfail 지정
+			response.sendRedirect("Mypage.do?result=passfail");
+			//msg = "비밀번호를 확인해주세요";
+			
 		}else {
 			if(pass.trim().equals("") || pass.isEmpty()) pass = dbPass;
 			String email = request.getParameter("email");
@@ -66,14 +76,13 @@ public class MypageUpdate extends HttpServlet {
 			int UpdateResult = mdao.setUpdateMember(mdto);
 			
 			if(UpdateResult > 0) {
-				response.sendRedirect("Mypage.do");
-				return;
+				response.sendRedirect("Mypage.do?result=clear");
 			}
 			else {
-				msg = "업데이트 실패";
+				response.sendRedirect("Mypage.do?result=updatefail");
 			}
 		}
-		response.sendRedirect("Mypage.do");
+		
 	}
 	
 }

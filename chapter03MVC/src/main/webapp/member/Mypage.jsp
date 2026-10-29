@@ -1,7 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<div class="joinwrap">
+	
+<%-- 	<c:if test="${param.result == 'clear' }">
+		<script type="text/javascript">
+			alert("업데이트 성공");
+			location.href="Mypage.do";
+		</script>
+	</c:if>
+	<c:if test="${param.result == 'passfail' }">
+		<script type="text/javascript">
+			alert("비밀번호를 확인해 주세요");
+			</script>
+	</c:if>
+	<c:if test="${param.result == 'updatefail' }">
+		<script type="text/javascript">
+			alert("업데이트 실패");
+			</script>
+	</c:if> --%>
+
 		<h2>마이페이지</h2>
 		<form action="MypageUpdate.do" method="post" name="mfrm">
 			<table width="500" border="1">
@@ -9,6 +27,7 @@
 					<td align="center" width="150">아이디</td>
 					<td width="350">
 						<input type="text" name="id" placeholder="아이디를 입력하세요" readonly="readonly" value="${id}"/>
+						<%-- <input type="hidden" name="id" value="${id}"/> --%>
 					</td>
 				</tr>	
 				<tr height="50">
@@ -38,14 +57,19 @@
 				<tr height="50">
 					<td align="center" width="150">관심분야</td>
 					<td width="350">
-						<input type="checkbox" name="hobby" value="캠핑" id="campping" ${hobby[0] == 1 ? 'checked' : "" }/>
+						<c:forTokens items="캠핑 등산 영화 독서" delims=" " var="item">
+							<input type="checkbox" name="hobby" value="${item}" id="hobby_${item}" <c:if test="${hobby.contains(item) }">checked</c:if> />
+							<label for="hobby_${item}">${item}</label>&nbsp;&nbsp;	
+						</c:forTokens>
+					
+						<%-- <input type="checkbox" name="hobby" value="캠핑" id="campping" ${hobby[0] == 1 ? 'checked' : "" }/>
 						<label for="campping">캠핑</label>&nbsp;&nbsp;					
 						<input type="checkbox" name="hobby" value="등산" id="mount" ${hobby[1] == 1 ? 'checked' : "" }/>
 						<label for="mount">등산</label>&nbsp;&nbsp;					
 						<input type="checkbox" name="hobby" value="영화" id="movie" ${hobby[2] == 1 ? 'checked' : "" }/>
 						<label for="movie">영화</label>&nbsp;&nbsp;					
 						<input type="checkbox" name="hobby" value="독서" id="book" ${hobby[3] == 1 ? 'checked' : "" }/>
-						<label for="book">독서</label>&nbsp;&nbsp;					
+						<label for="book">독서</label>&nbsp;&nbsp; --%>
 					</td>
 				</tr>
 				<tr height="50">
@@ -75,7 +99,7 @@
 				<tr height="50">
 					<td align="center" width="150">남기는 말</td>
 					<td width="350">
-						<textarea rows="5" cols="40" name="info"></textarea>
+						<textarea rows="5" cols="40" name="info" >${info }</textarea>
 					</td>
 				</tr>
 				<tr height="50">
@@ -140,5 +164,6 @@
 	
 		if(${msg!="" && not empty msg}){
 			alert("${msg}");
+			location.href="Mypage.do";
 		}
 	</script>
