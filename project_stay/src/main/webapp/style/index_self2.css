@@ -1,0 +1,695 @@
+@charset "UTF-8";
+
+/* ==========================================
+   0. Reset & Base
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #0054EC;
+    --cyan: #00B8BD;
+    --gradient: linear-gradient(135deg, #0054EC 0%, #00B8BD 100%);
+    --navy: #0A1628;
+    --navy2: #13233F;
+    --text: #0F172A;
+    --text2: #64748B;
+    --bg: #F1F5F9;
+    --white: #FFFFFF;
+    --radius: 20px;
+    --shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+    --content-width: 1370px;   /* 1330 → 1370 */
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Noto Sans KR', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+}
+
+
+/* ==========================================
+   1. Header
+   ========================================== */
+#header {
+    width: 100%;
+	background: linear-gradient(145deg, #06101F 0%, #0F1C33 35%, #1A3358 70%, #24507A 100%);
+	background-image: url("../image/bana1.jpg");
+  	background-repeat: no-repeat; /* 반복 방지 */
+  	background-position: center;  /* 중앙 정렬 */
+  	background-size: cover;       /* 크기 조절 방식 선택 */
+    color: #fff;
+    padding: 28px 0 48px;
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+
+/* 강한 글로우 효과 */
+/* #header::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -5%;
+    width: 620px;
+    height: 620px;
+    background: radial-gradient(circle, rgba(0, 184, 189, 0.32) 0%, rgba(0, 84, 236, 0.12) 45%, transparent 70%);
+    pointer-events: none;
+} */
+
+#header::after {
+    content: '';
+    position: absolute;
+    bottom: -35%;
+    left: -8%;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(0, 84, 236, 0.28) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+#header .left_top,
+#header .bottom {
+    max-width: var(--content-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+#header .left_top img {
+    height: 100px;
+    object-fit: contain;
+    /* border: 1px solid red; */
+}
+
+/* 우측 메뉴 – 컨텐츠 영역 안 */
+#header .right_top {
+    position: absolute;
+    top: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: var(--content-width);
+    padding: 0 40px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 28px;
+    align-items: center;
+    box-sizing: border-box;
+    z-index: 3;
+}
+
+#header .right_top a {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    transition: color 0.2s;
+}
+
+#header .right_top a:hover {
+    color: #fff;
+}
+
+/* 검색바 */
+#header .bottom {
+    margin-top: 120px;
+    width: 1980px;
+	height: 320px;
+}
+
+/* #header img.bana{
+	width: 1980px;
+	height: 320px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+} */
+
+#header .search_wrap form {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    padding: 8px 10px 8px 6px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28);
+}
+
+#header .search_wrap .city,
+#header .search_wrap .type,
+#header .search_wrap .date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#header .search_wrap .city,
+#header .search_wrap .type {
+    flex: 1;
+    padding: 0 18px;
+    border-right: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+#header .search_wrap .date {
+    flex: 1.2;
+    padding: 0 20px;
+    border-right: 1px solid rgba(15, 23, 42, 0.08);
+    cursor: pointer;
+}
+
+/* 검색바 아이콘 */
+#header .search_wrap .search_bar_img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+    flex-shrink: 0;
+    opacity: 0.7;
+    /* border: 1px solid red; */
+}
+
+#header .search_wrap select {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    outline: none;
+    cursor: pointer;
+}
+
+#header .search_wrap .date p {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+#header .search_wrap .search_bar {
+    flex: 1.6;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#header .search_wrap .search_bar input {
+    width: 100%;
+    border: none;
+    font-size: 15px;
+    outline: none;
+    background: transparent;
+    color: var(--text);
+}
+
+#header .search_wrap .search_bar input::placeholder {
+    color: #94A3B8;
+}
+
+/* 검색 버튼 */
+#header .search_wrap .btn {
+    width: 52px;
+    height: 52px;
+    background: var(--gradient);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 20px rgba(0, 84, 236, 0.4);
+    flex-shrink: 0;
+}
+
+#header .search_wrap .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 84, 236, 0.5);
+}
+
+#header .search_wrap .btn img {
+    width: 95px;
+    height: 95px;
+    filter: brightness(0) invert(1);
+}
+
+/* ==========================================
+   Header Select / Option 스타일
+   ========================================== */
+
+/* select 기본 리셋 + 커스텀 */
+#header .search_wrap select {
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    outline: none;
+    cursor: pointer;
+    appearance: none;                 /* 기본 화살표 제거 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 22px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2364748B' d='M1.4 1.4L6 6l4.6-4.6' stroke='%2364748B' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 2px center;
+    background-size: 12px;
+    transition: color 0.2s ease;
+}
+
+/* 포커스 / 호버 */
+#header .search_wrap select:hover {
+    color: var(--primary);
+}
+
+#header .search_wrap select:focus {
+    color: var(--primary);
+}
+
+/* placeholder 역할의 disabled option */
+#header .search_wrap select option[disabled] {
+    color: #94A3B8;
+    font-weight: 500;
+}
+
+/* 일반 option */
+#header .search_wrap select option {
+    color: var(--text);
+    font-weight: 500;
+    background: #fff;
+    padding: 10px 14px;               /* 일부 브라우저에서만 적용 */
+}
+
+/* 선택된 option */
+#header .search_wrap select option:checked {
+    background: #EFF6FF;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* ==========================================
+   2. 공통 섹션 타이틀
+   ========================================== */
+.section_top > p,
+.section_middle > p,
+.section_bottom > p {
+    max-width: var(--content-width);
+    margin: 56px auto 24px;
+    padding: 0 40px;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.8px;
+    position: relative;
+}
+
+.section_top > p::after,
+.section_middle > p::after,
+.section_bottom > p::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 40px;
+    width: 32px;
+    height: 3.5px;
+    background: var(--gradient);
+    border-radius: 4px;
+}
+
+
+/* ==========================================
+   3. 추천 숙소
+   ========================================== */
+.section_top .group.recommend {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.section_top .rec_row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.section_top .rec_card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.05);
+    box-shadow: var(--shadow);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section_top .rec_card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+.section_top .imgbox {
+    position: relative;
+    width: 100%;
+    height: 190px;
+    overflow: hidden;
+    background: #E2E8F0;
+}
+
+.section_top .imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.section_top .rec_card:hover .imgbox img {
+    transform: scale(1.06);
+}
+
+.section_top .badgeLike_box {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(15, 23, 42, 0.72);
+    backdrop-filter: blur(8px);
+    padding: 5px 11px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.section_top .badge_like {
+    color: #FFD700;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* 리뷰 개수 */
+.section_top .badge_like_cnt {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.section_top .acc_cate {
+    font-size: 12px;
+    color: var(--primary);
+    margin: 16px 16px 3px;
+    font-weight: 600;
+}
+
+.section_top .acc_name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 16px 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.section_top .acc_city {
+    font-size: 13px;
+    color: var(--text2);
+    margin: 0 16px 18px;
+}
+
+
+/* ==========================================
+   4. 이달의 여행지
+   ========================================== */
+.section_middle .monthRegion {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+}
+
+.section_middle .month_card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    height: 350px;               /* 265 → 300 (세로로 더 길게) */
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.section_middle .month_card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+}
+
+.section_middle .month_card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.section_middle .month_card:hover img {
+    transform: scale(1.08);
+}
+
+
+/* ==========================================
+   5. 리뷰 (좌측 이미지 + 우측 텍스트 + 슬라이드 준비)
+   ========================================== */
+.section_bottom {
+    margin-bottom: 80px;
+    overflow: hidden;
+}
+
+.section_bottom .rev_row {
+    max-width: var(--content-width);
+    margin: 0 auto 22px;
+    padding: 0 40px;
+    display: flex;
+    gap: 22px;
+    transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* 카드 */
+.section_bottom .rev_card {
+    display: flex;
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
+    transition: all 0.3s ease;
+    height: 168px;
+    flex: 0 0 calc(50% - 11px);
+    min-width: 0;
+}
+
+.section_bottom .rev_card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12);
+    border-color: rgba(0, 84, 236, 0.15);
+}
+
+.section_bottom .rev_card > img {
+    width: 180px;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    transition: transform 0.4s ease;
+}
+
+.section_bottom .rev_card:hover > img {
+    transform: scale(1.05);
+}
+
+/* 텍스트 영역 */
+.section_bottom .badgereview_box {
+    flex: 1;
+    padding: 18px 22px 18px 26px;  /* 왼쪽 여백을 조금 더 줌 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    background: var(--white);
+    min-width: 0;
+    position: relative;
+}
+
+/* 왼쪽 포인트 라인 */
+.section_bottom .badgereview_box::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20px;
+    bottom: 20px;
+    width: 3px;
+    background: var(--gradient);
+    border-radius: 0 4px 4px 0;
+}
+
+/* 평점 */
+.section_bottom .badge_review:first-child {
+    font-size: 14px;
+    font-weight: 700;
+    color: #EAB308;
+    letter-spacing: -0.2px;
+    margin-left: 2px;
+}
+
+/* 호텔명 */
+.section_bottom .review_acc_name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    background: linear-gradient(90deg, rgba(0, 84, 236, 0.08) 0%, transparent 100%);
+    padding: 3px 10px 3px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    width: fit-content;
+    letter-spacing: -0.2px;
+    margin-left: 2px;
+}
+
+/* 리뷰 내용 */
+.section_bottom .badge_review:last-child {
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #334155;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-top: 2px;
+}
+
+/* 따옴표 스타일 (사용자가 수정한 값 유지) */
+.section_bottom .review_say {
+    font-size: 30px;
+    font-weight: 700;
+    color: #94A3B8;
+    opacity: 0.75;
+    vertical-align: -6px;   /* 큰 따옴표 기준으로 위치 맞춤 */
+    margin: 0 6px;
+    line-height: 0.8;
+}
+
+/* ==========================================
+   6. Footer
+   ========================================== */
+footer {
+    width: 100%;
+    background: linear-gradient(180deg, #0A1628 0%, #060E1A 100%);
+    color: #8B9CB3;
+    padding: 52px 0 36px;
+    font-size: 13px;
+    margin-top: auto;
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: var(--gradient);
+    border-radius: 0 0 4px 4px;
+}
+
+footer .company,
+footer .link,
+footer .legal.notice,
+footer > p {
+    max-width: var(--content-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+footer .company {
+    margin-bottom: 28px;
+}
+
+footer .company P {
+    margin-bottom: 7px;
+    line-height: 1.7;
+}
+
+footer .company P:first-child {
+    font-weight: 700;
+    color: #E8EEF5;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+footer .link {
+    margin-bottom: 24px;
+}
+
+footer .link ul {
+    display: flex;
+    gap: 24px;
+}
+
+footer .link ul li a {
+    color: #C5D0DE;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+footer .link ul li a:hover {
+    color: #00C9FF;
+}
+
+footer .legal.notice {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+}
+
+footer .legal.notice span a {
+    color: #7A8BA3;
+    transition: color 0.2s;
+}
+
+footer .legal.notice span a:hover {
+    color: #E8EEF5;
+}
+
+footer > p {
+    color: #5A6B82;
+    font-size: 12px;
+}

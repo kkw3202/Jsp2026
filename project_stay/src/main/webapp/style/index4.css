@@ -1,0 +1,785 @@
+@charset "UTF-8";
+
+/* =========================
+   머물다 - 숙소 예약 사이트
+   색상: 아이보리 / 네이비 / 청록
+   ========================= */
+
+:root {
+    --primary: #2f6f68;
+    --primary-dark: #245751;
+    --primary-light: #e8f2ef;
+    --navy: #263b3a;
+    --text: #303b3a;
+    --muted: #7d8986;
+    --line: #e5e9e6;
+    --background: #f7f8f5;
+    --white: #ffffff;
+    --star: #f4b740;
+    --shadow: 0 8px 24px rgba(35, 61, 56, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: var(--text);
+    background: var(--background);
+    font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button,
+select,
+.btn {
+    cursor: pointer;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+#header {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+        "logo links"
+        "search search";
+    align-items: center;
+    gap: 20px 28px;
+    padding: 22px max(5%, calc((100% - 1200px) / 2));
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+}
+
+#header .left_top {
+    grid-area: logo;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+}
+
+#header .left_top a {
+    display: inline-flex;
+    align-items: center;
+}
+
+#header .left_top img {
+    width: auto;
+    max-width: 190px;
+    max-height: 58px;
+    object-fit: contain;
+}
+
+#header .right_top {
+    grid-area: links;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+}
+
+#header .right_top a {
+    color: #65716e;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color .2s ease;
+}
+
+#header .right_top a:hover {
+    color: var(--primary);
+}
+
+#header .bottom {
+    grid-area: search;
+}
+
+#header .search_wrap {
+    width: 100%;
+    padding: 8px;
+    background: var(--white);
+    border: 1px solid #dce5e1;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(38, 59, 58, .05);
+}
+
+#header .search_wrap form {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 1.1fr minmax(180px, 1.7fr) 52px;
+    align-items: stretch;
+    gap: 6px;
+}
+
+#header .city,
+#header .date,
+#header .type,
+#header .search_bar {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 50px;
+    padding: 0 14px;
+    background: #f8faf8;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    transition: border-color .2s ease, background .2s ease;
+}
+
+#header .city:focus-within,
+#header .type:focus-within,
+#header .search_bar:focus-within,
+#header .date:hover {
+    background: var(--white);
+    border-color: #b8d5ce;
+}
+
+#header .city select,
+#header .type select {
+    width: 100%;
+    min-width: 0;
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+}
+
+#header .date {
+    cursor: pointer;
+}
+
+#header .date p {
+    margin: 0;
+    color: #66736f;
+}
+
+#header .search_bar input {
+    width: 100%;
+    min-width: 0;
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    outline: 0;
+}
+
+#header .search_bar input::placeholder {
+    color: #9aa5a1;
+}
+
+#header .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    background: var(--primary);
+    border-radius: 10px;
+    transition: background .2s ease, transform .2s ease;
+}
+
+#header .btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+#header .btn img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    /* 어두운 검색 아이콘도 버튼 위에서 흰색으로 보이게 처리 */
+    filter: brightness(0) invert(1);
+}
+
+/* =========================
+   공통 섹션 제목 및 영역
+   ========================= */
+
+.section_top,
+.section_middle,
+.section_bottom {
+    width: min(1200px, 90%);
+    margin: 0 auto;
+}
+
+.section_top {
+    padding-top: 54px;
+}
+
+.section_middle,
+.section_bottom {
+    padding-top: 62px;
+}
+
+.section_top > p,
+.section_middle > p,
+.section_bottom > p {
+    position: relative;
+    margin: 0 0 25px;
+    padding-left: 15px;
+    color: var(--navy);
+    font-size: 25px;
+    font-weight: 750;
+    letter-spacing: -0.8px;
+}
+
+.section_top > p::before,
+.section_middle > p::before,
+.section_bottom > p::before {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 0;
+    width: 4px;
+    content: "";
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+/* =========================
+   추천 숙소 카드
+   ========================= */
+
+.group.recommend {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.rec_row,
+.rev_row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.rec_card {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid #edf0ed;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(38, 59, 58, .035);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.rec_card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.rec_card > a {
+    display: block;
+    height: 100%;
+}
+
+.rec_card .imgbox {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1.48 / 1;
+    background: #e8ece9;
+}
+
+.rec_card .imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .45s ease;
+}
+
+.rec_card:hover .imgbox img {
+    transform: scale(1.045);
+}
+
+.badgeLike_box {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.badge_like {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    color: #51452a;
+    background: rgba(255, 255, 255, .94);
+    border: 1px solid rgba(255, 255, 255, .7);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 750;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+
+.rec_card .acc_cate {
+    margin: 15px 17px 2px;
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.rec_card .acc_name {
+    margin: 0 17px;
+    overflow: hidden;
+    color: var(--navy);
+    font-size: 17px;
+    font-weight: 750;
+    letter-spacing: -0.4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.rec_card .acc_city {
+    margin: 3px 17px 17px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* =========================
+   이달의 여행지
+   ========================= */
+
+.monthRegion {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.month_card {
+    overflow: hidden;
+    background: #e8ece9;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(38, 59, 58, .04);
+}
+
+.month_card a {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 1.8 / 1;
+}
+
+.month_card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .45s ease, filter .3s ease;
+}
+
+.month_card:hover img {
+    transform: scale(1.06);
+    filter: brightness(.92);
+}
+
+/* =========================
+   리뷰 카드
+   ========================= */
+
+.section_bottom {
+    padding-bottom: 70px;
+}
+
+.section_bottom .rev_row {
+    margin-bottom: 22px;
+}
+
+.rev_card {
+    min-width: 0;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid #edf0ed;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(38, 59, 58, .04);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.rev_card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.rev_card a {
+    display: block;
+    height: 100%;
+}
+
+.rev_imgbox {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1.15 / 1;
+    background: #e8ece9;
+}
+
+.rev_imgbox::after {
+    position: absolute;
+    inset: 35% 0 0;
+    content: "";
+    background: linear-gradient(to bottom, transparent, rgba(12, 25, 24, .78));
+    pointer-events: none;
+}
+
+.rev_imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .45s ease;
+}
+
+.rev_card:hover .rev_imgbox img {
+    transform: scale(1.05);
+}
+
+.badgereview_box {
+    position: absolute;
+    z-index: 1;
+    right: 15px;
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+}
+
+.badge_review:first-child {
+    display: inline-flex;
+    padding: 4px 9px;
+    color: #51452a;
+    background: rgba(255, 255, 255, .95);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.badge_review:last-child {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.5;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+footer {
+    padding: 42px max(5%, calc((100% - 1200px) / 2)) 25px;
+    color: #d4ddda;
+    background: #263b3a;
+    font-size: 12px;
+}
+
+footer .company {
+    padding-bottom: 23px;
+    border-bottom: 1px solid rgba(255, 255, 255, .13);
+}
+
+footer .company p {
+    margin: 7px 0;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+footer .company p:first-child {
+    margin-bottom: 12px;
+    color: var(--white);
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+footer .link ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 22px;
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+footer .link a,
+footer .legal a {
+    color: #e0e8e5;
+    transition: color .2s ease;
+}
+
+footer .link a:hover,
+footer .legal a:hover {
+    color: #9ed4c8;
+}
+
+footer .legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    padding: 17px 0;
+    border-top: 1px solid rgba(255, 255, 255, .13);
+}
+
+footer .legal span:nth-child(3) a {
+    color: var(--white);
+    font-weight: 750;
+}
+
+footer > p {
+    margin: 8px 0 0;
+    color: #9eafaa;
+    font-size: 11px;
+}
+
+/* =========================
+   키보드 접근성
+   ========================= */
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+.btn:focus-visible,
+.date:focus-visible {
+    outline: 3px solid #9ed4c8;
+    outline-offset: 3px;
+}
+
+/* =========================
+   태블릿
+   ========================= */
+
+@media (max-width: 900px) {
+    #header {
+        padding: 18px 5%;
+    }
+
+    #header .search_wrap form {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #header .search_bar {
+        grid-column: 1 / 2;
+    }
+
+    #header .btn {
+        grid-column: 2 / 3;
+    }
+
+    .section_top,
+    .section_middle,
+    .section_bottom {
+        width: 90%;
+    }
+
+    .rec_row,
+    .rev_row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .monthRegion {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+
+    .section_top > p,
+    .section_middle > p,
+    .section_bottom > p {
+        font-size: 23px;
+    }
+}
+
+/* =========================
+   모바일
+   ========================= */
+
+@media (max-width: 560px) {
+    #header {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "logo"
+            "links"
+            "search";
+        gap: 14px;
+        padding: 17px 5%;
+    }
+
+    #header .left_top {
+        justify-content: center;
+    }
+
+    #header .left_top img {
+        max-width: 160px;
+        max-height: 48px;
+    }
+
+    #header .right_top {
+        justify-content: center;
+        gap: 8px 16px;
+    }
+
+    #header .search_wrap {
+        padding: 7px;
+    }
+
+    #header .search_wrap form {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+
+    #header .city,
+    #header .date,
+    #header .type,
+    #header .search_bar {
+        min-height: 44px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    #header .search_bar {
+        grid-column: 1 / 2;
+    }
+
+    #header .btn {
+        min-height: 44px;
+        grid-column: 2 / 3;
+    }
+
+    .section_top {
+        padding-top: 35px;
+    }
+
+    .section_middle,
+    .section_bottom {
+        padding-top: 42px;
+    }
+
+    .section_top > p,
+    .section_middle > p,
+    .section_bottom > p {
+        margin-bottom: 18px;
+        font-size: 21px;
+    }
+
+    .rec_row,
+    .rev_row {
+        gap: 12px;
+    }
+
+    .group.recommend {
+        gap: 14px;
+    }
+
+    .rec_card {
+        border-radius: 11px;
+    }
+
+    .rec_card .acc_cate {
+        margin: 10px 11px 2px;
+        font-size: 11px;
+    }
+
+    .rec_card .acc_name {
+        margin: 0 11px;
+        font-size: 14px;
+    }
+
+    .rec_card .acc_city {
+        margin: 3px 11px 12px;
+        font-size: 12px;
+    }
+
+    .badgeLike_box {
+        top: 8px;
+        right: 8px;
+    }
+
+    .badge_like {
+        padding: 4px 7px;
+        font-size: 10px;
+    }
+
+    .monthRegion {
+        gap: 11px;
+    }
+
+    .month_card {
+        border-radius: 10px;
+    }
+
+    .rev_imgbox {
+        aspect-ratio: 1 / 1.15;
+    }
+
+    .badgereview_box {
+        right: 9px;
+        bottom: 10px;
+        left: 9px;
+        gap: 5px;
+    }
+
+    .badge_review:first-child {
+        padding: 3px 7px;
+        font-size: 10px;
+    }
+
+    .badge_review:last-child {
+        font-size: 11px;
+    }
+
+    .section_bottom {
+        padding-bottom: 45px;
+    }
+
+    footer {
+        padding: 30px 5% 22px;
+        font-size: 11px;
+    }
+
+    footer .company p:first-child {
+        font-size: 19px;
+    }
+
+    footer .link ul {
+        gap: 10px 16px;
+    }
+
+    footer .legal {
+        gap: 9px 14px;
+    }
+}
+
+/* 움직임 최소화 설정을 사용하는 사용자 배려 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+}

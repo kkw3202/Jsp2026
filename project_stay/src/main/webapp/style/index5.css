@@ -1,0 +1,565 @@
+@charset "UTF-8";
+/* ================================
+   머물다 (Mumulda) - Main CSS
+   ================================ */
+
+/* ---------- Reset & Base ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    background-color: #f7f8fa;
+    color: #222;
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+button, select, input {
+    font-family: inherit;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+/* ---------- Container ---------- */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ================================
+   Header
+   ================================ */
+#header {
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding-bottom: 16px;
+}
+
+/* 좌측 상단 로고 */
+.left_top {
+    padding: 16px 0 12px;
+}
+
+.left_top a {
+    display: inline-block;
+}
+
+.left_top img {
+    height: 42px;
+    width: auto;
+}
+
+/* 우측 상단 메뉴 */
+.right_top {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.right_top a {
+    color: #444;
+    transition: color 0.2s;
+}
+
+.right_top a:hover {
+    color: #00aaff;
+}
+
+/* 검색 영역 */
+.bottom {
+    padding: 0 0 4px;
+}
+
+.search_wrap {
+    background: #fff;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 6px 8px 6px 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search_wrap:focus-within {
+    border-color: #00aaff;
+    box-shadow: 0 4px 20px rgba(0, 170, 255, 0.15);
+}
+
+.search_wrap form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 4px;
+}
+
+.city,
+.date,
+.type {
+    flex-shrink: 0;
+}
+
+.city select,
+.type select {
+    padding: 10px 28px 10px 12px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    border-radius: 8px;
+    appearance: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 8px center;
+}
+
+.city select:hover,
+.type select:hover {
+    background-color: #f5f7fa;
+}
+
+.date {
+    padding: 10px 16px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    border-radius: 8px;
+    min-width: 110px;
+    text-align: center;
+}
+
+.date:hover {
+    background-color: #f5f7fa;
+    color: #00aaff;
+}
+
+.search_bar {
+    flex: 1;
+    min-width: 120px;
+}
+
+.search_bar input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #333;
+}
+
+.search_bar input::placeholder {
+    color: #aaa;
+}
+
+.btn {
+    width: 48px;
+    height: 48px;
+    background: #00aaff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn:hover {
+    background: #0090e0;
+    transform: scale(1.05);
+}
+
+.btn img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) invert(1);
+}
+
+/* ================================
+   Section 공통
+   ================================ */
+.section_top,
+.section_middle,
+.section_bottom {
+    margin-top: 48px;
+}
+
+.section_top > p,
+.section_middle > p,
+.section_bottom > p {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 20px;
+    letter-spacing: -0.3px;
+}
+
+/* ================================
+   추천 숙소
+   ================================ */
+.group.recommend {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.rec_row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.rec_card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.rec_card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.rec_card a {
+    display: block;
+}
+
+.imgbox {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.rec_card:hover .imgbox img {
+    transform: scale(1.06);
+}
+
+.badgeLike_box {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+.badge_like {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.acc_cate {
+    font-size: 12px;
+    color: #00aaff;
+    font-weight: 600;
+    margin: 12px 14px 2px;
+}
+
+.acc_name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+    margin: 0 14px 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.acc_city {
+    font-size: 13px;
+    color: #888;
+    margin: 0 14px 14px;
+}
+
+/* ================================
+   이달의 여행지
+   ================================ */
+.monthRegion {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+}
+
+.month_card {
+    border-radius: 14px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    position: relative;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s;
+}
+
+.month_card:hover {
+    transform: translateY(-5px);
+}
+
+.month_card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.month_card:hover img {
+    transform: scale(1.08);
+}
+
+.month_card a {
+    display: block;
+    height: 100%;
+}
+
+/* ================================
+   리뷰
+   ================================ */
+.rev_row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.rev_card {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.rev_card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+}
+
+.rev_imgbox {
+    position: relative;
+    aspect-ratio: 1 / 1.1;
+    overflow: hidden;
+}
+
+.rev_imgbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+}
+
+.rev_card:hover .rev_imgbox img {
+    transform: scale(1.06);
+}
+
+.badgereview_box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+    padding: 40px 14px 14px;
+    color: #fff;
+}
+
+.badge_review {
+    display: block;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.badge_review:first-child {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+/* ================================
+   Footer
+   ================================ */
+footer {
+    margin-top: 80px;
+    background: #1a1a1a;
+    color: #bbb;
+    padding: 48px 20px 32px;
+    font-size: 13px;
+}
+
+footer .company {
+    max-width: 1200px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+}
+
+footer .company p {
+    margin-bottom: 6px;
+}
+
+footer .company p:first-child {
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+footer .link {
+    max-width: 1200px;
+    margin: 0 auto 24px;
+}
+
+footer .link ul {
+    display: flex;
+    gap: 24px;
+}
+
+footer .link a {
+    color: #ddd;
+    transition: color 0.2s;
+}
+
+footer .link a:hover {
+    color: #00aaff;
+}
+
+footer .legal {
+    max-width: 1200px;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+footer .legal a {
+    color: #999;
+    transition: color 0.2s;
+}
+
+footer .legal a:hover {
+    color: #fff;
+}
+
+footer > p:last-child {
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #777;
+    font-size: 12px;
+}
+
+/* ================================
+   Responsive
+   ================================ */
+@media (max-width: 1024px) {
+    .rec_row,
+    .rev_row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .monthRegion {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .right_top {
+        position: static;
+        justify-content: flex-end;
+        padding: 0 0 12px;
+        gap: 14px;
+        font-size: 13px;
+    }
+
+    .search_wrap {
+        border-radius: 16px;
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+
+    .search_wrap form {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .city,
+    .date,
+    .type {
+        flex: 1 1 45%;
+    }
+
+    .search_bar {
+        flex: 1 1 100%;
+        order: 4;
+    }
+
+    .btn {
+        order: 5;
+        margin-left: auto;
+    }
+
+    .rec_row,
+    .rev_row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .monthRegion {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section_top > p,
+    .section_middle > p,
+    .section_bottom > p {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rec_row,
+    .rev_row {
+        grid-template-columns: 1fr;
+    }
+
+    .monthRegion {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .right_top {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}

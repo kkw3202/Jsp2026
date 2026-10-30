@@ -19,4 +19,3 @@
 			</table>
 		</form>
 	</div>
-	
