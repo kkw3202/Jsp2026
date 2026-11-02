@@ -36,7 +36,7 @@
 				<form action="#" method="get"> <!-- 검색 기능으로 매핑 필요 -->
 					<!-- 지역, 추후 여력 되면 select 말고, 팝업해서 보기 좋게 바꾸기 -->
 					<div class="city">
-					<!-- 	<img alt="핀 이미지" src="image/ping.svg" class="search_bar_img"> -->
+					<img alt="핀 이미지" src="image/ping.svg" class="search_bar_img">
 						<select name="city_code"> <!-- 칼럼 명 변경후 재확인 필요. -->
 							<option selected="selected" disabled="disabled" value="">지역 선택</option>
 							<option value="서울">서울</option>
@@ -53,13 +53,13 @@
 					</div>
 					<!-- 숙박 기간 -->
 					<div class="date" onclick="show_calendar()">
-						<!-- <img alt="달력이미지" src="image/cal.svg" class="search_bar_img"> -->
+						<img alt="달력이미지" src="image/cal.svg" class="search_bar_img">
 						<!-- 나중에 달력 붙이기 -->
 						<p>일정 선택</p> <!-- 달력에서 선택한 날 띄우기 -->
 					</div>
 					<!-- 숙소 유형 -->
 					<div class="type">
-						<!-- <img alt="호텔" src="image/bilding.svg" class="search_bar_img"> -->
+						<img alt="호텔" src="image/bilding.svg" class="search_bar_img">
 						<select name="acc_type"> <!-- 칼럼 명 변경후 재확인 필요. -->
 							<option selected="selected" disabled="disabled" value="">숙소 유형 선택</option>
 							<option value="모텔">모텔</option>

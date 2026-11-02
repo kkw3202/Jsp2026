@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="style/boardwrite.css">
 
-<div class="rewrap">
+<div class="boardwrap">
     <h2>게시글 보기</h2>
     <table width="600" border="1">
         <tr height="40">
@@ -32,10 +33,15 @@
         <tr height="40">
             <td align="center" colspan="4">
                 <!-- 데이터를 읽어들여야 하기 때문에 servlet인 ~.do로 먼저 넘겨주고 다시 view-JSP파일로 넘겨주어야 함을 주의하자 -->
-                <input type="button" value="답글쓰기" onclick="location.href='BoardReWriterCon.do?num=${bdto.num}&ref=${bdto.ref}&re_step=${bdto.re_step}'">
-                <input type="button" value="수정하기" onclick="location.href='BoardUpdateCon.do?num=${bdto.num}'">
-                <input type="button" value="삭제하기" onclick="location.href='BoardDeleteCon.do?num=${bdto.num}'">
-                <input type="button" value="목록보기" onclick="location.href='BoardListCon.do'">
+                <!-- 답글은 관리자만, 수정/삭제는 작성자만 보이도록 한다. -->
+                <c:if test="${sessionScope.id == 'admin' }">
+                	<input type="button" value="답글쓰기" onclick="location.href='BoardReWriterCon.do?num=${bdto.num}&ref=${bdto.ref}&re_step=${bdto.re_step}'">                
+                </c:if>
+                <c:if test="${sessionScope.id != 'admin' && not empty sessionScope.id && sessionScope.id == bdto.id}">
+	                <input type="button" value="수정하기" onclick="location.href='BoardUpdateCon.do?num=${bdto.num}'">
+	                <input type="button" value="삭제하기" onclick="location.href='BoardDeleteCon.do?num=${bdto.num}'">                	
+                </c:if>
+               	 	<input type="button" value="목록보기" onclick="location.href='BoardListCon.do'">
             </td>
         </tr>
     </table>

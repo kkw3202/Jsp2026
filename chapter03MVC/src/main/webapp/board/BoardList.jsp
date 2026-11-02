@@ -32,7 +32,10 @@
 					<td width="50" align="center">${number }</td>
 					<td width="320" align="left">
 						<c:if test="${blist.re_step != 0 }">
-							
+							<c:forEach var="i" begin="1" end="5">
+								&nbsp;
+							</c:forEach>
+							┕
 						</c:if>
 						<a href="BoardInfoControl.do?num=${blist.num }">${blist.subject }</a>
 					</td>

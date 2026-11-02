@@ -19,7 +19,7 @@ public class BoardDAO {
 		try {
 			con = Util.getConnection();
 			
-			String sql = "select * from board order by ref desc limit ?, ?";
+			String sql = "select * from board where chkDel=0 order by ref desc limit ?, ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, pageSize);
@@ -66,7 +66,7 @@ public class BoardDAO {
 		try {
 			con = Util.getConnection();
 			
-			String sql = "select count(*) from board";
+			String sql = "select count(*) from board where chkDel=0";
 			pstmt = con.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
@@ -153,6 +153,7 @@ public class BoardDAO {
 			
 			if(rs.next()) {
 				bdto.setNum(rs.getInt("num"));
+				bdto.setPassword(rs.getString("password"));
 				bdto.setWriter(rs.getString("writer"));
 				bdto.setEmail(rs.getString("email"));
 				bdto.setSubject(rs.getString("subject"));
@@ -161,6 +162,7 @@ public class BoardDAO {
 				bdto.setContent(rs.getString("content"));
 				bdto.setRef(rs.getInt("ref"));
 				bdto.setRe_step(rs.getInt("re_step"));
+				bdto.setId(rs.getString("id"));
 			}
 			
 		}catch(Exception e){
@@ -224,17 +226,27 @@ public class BoardDAO {
 	
 	// --------------------------------------------------------
 	// 답글 작성용 메소드
-	public void insertAnswerBoard(BoardDTO bdto) {
+	public void reinsertBoard(BoardDTO bdto) {
 		try {
 			con = Util.getConnection();
 
-			String sql = "insert into board values(null, admin, admin@naver.com, ?, ?, current_date(), ?, ?, 0, ?, admin)";
+			int ref = bdto.getRef();
+			int re_step = 1;
+			
+			System.out.println("ref : " + ref);
+			System.out.println("re_step : " + re_step);
+			
+			String sql = "insert into board values(null, ?, ?, ?, ?, current_date(), ?, ?, 0, ?, ?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, bdto.getSubject());
-			pstmt.setString(2, bdto.getPassword());
-			pstmt.setInt(3, bdto.getRef());
-			pstmt.setInt(4, bdto.getRe_step());
-			pstmt.setString(5, bdto.getContent());
+
+			pstmt.setString(1, bdto.getWriter());
+			pstmt.setString(2, bdto.getEmail());
+			pstmt.setString(3, bdto.getSubject());
+			pstmt.setString(4, bdto.getPassword());
+			pstmt.setInt(5, ref); // 원 글의 ref 값
+			pstmt.setInt(6, re_step);
+			pstmt.setString(7, bdto.getContent());
+			pstmt.setString(8, bdto.getId());
 			
 			pstmt.executeUpdate();
 			
@@ -250,5 +262,59 @@ public class BoardDAO {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	// --------------------------------------------------------
+	// 게시글 수정 메소드
+	public void updateOneBoard(int num, String subject, String content) {
+		try {
+			
+			String sql = "update board set subject=?, content=? where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, subject);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, num);
+			
+			pstmt.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println("업뎃 실패");
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	// --------------------------------------------------------
+	// 게시글 하나 소프트 삭제하는 메소드
+	public void boardDelete(int num) {
+		// chkDel 1 => 화면에 출력 안함.
+		// chkDel 0 => 화면에 출력 함.
+		try {
+			con = Util.getConnection();
+			
+			String sql = "update board set chkDel = 1 where num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+
+			pstmt.executeUpdate();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			try {
+				if(con != null) con.close();
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }

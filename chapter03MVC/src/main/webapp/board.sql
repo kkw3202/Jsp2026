@@ -23,3 +23,34 @@ INSERT INTO board (writer, email, subject, password, reg_date, ref, re_step, rea
 ('jung06', 'jung06@naver.com', 'RE: 영화 추천',          '6666', '2026-10-18', 5, 1, 6,  '요즘 개봉작 중에 스릴러가 재미있습니다.',    'jung06'),
 ('kang07', 'kang07@naver.com', 'RE: 캠핑 장비 추천',     '7777', '2026-10-22', 2, 2, 3,  '장비는 대여해서 먼저 써보셔도 좋아요.',      'kang07'),
 ('kim03',  'kim03@naver.com',  '등산 영화 모임 후기',    '3333', '2026-10-27', 7, 0, 6,  '지난 모임 정말 즐거웠습니다. 감사합니다.',   'kim03');
+
+create table carProduct(
+    no int auto_increment primary key,  -- 자동차 식별자
+    carName varchar(20),                -- 자동차 이름
+    price int,                          -- 자동차 가격
+    company varchar(50),                -- 자동차 회사
+    img varchar(50),                    -- 자동차 이미지
+    info varchar(500)                   -- 자동차 설명
+);
+
+insert into carProduct (carName, price, company, img, info) values
+('Veyron',     2000000000, 'Bugatti',   '1.jpg',  '초고성능 슈퍼카입니다.'),
+('NSX',        180000000,  'Honda',     '2.jpg',  '하이브리드 스포츠카입니다.'),
+('Fortwo',     25000000,   'Smart',     '3.jpg',  '도심형 초소형 모델입니다.'),
+('Pony',       15000000,   'Hyundai',   '4.jpg',  '한국 자동차의 시작을 알린 클래식 모델입니다.'),
+('Concept X',  500000000,  'Future',    '5.jpg',  '미래형 콘셉트카입니다.'),
+('Mini',       42000000,   'BMW',       '6.jpg',  '개성 있는 소형 해치백입니다.'),
+('Sonata',     35000000,   'Hyundai',   '7.jpg',  '편안한 중형 세단입니다.'),
+('Avante',     28000000,   'Hyundai',   '8.jpg',  '인기 준중형 세단입니다.'),
+('Ioniq5',     55000000,   'Hyundai',   '9.jpg',  '전기차 전용 모델입니다.'),
+('Concept EV', 600000000,  'Future',    '10.jpg', '미래형 전기차입니다.'),
+('A4',         60000000,   'Audi',      '11.jpg', '프리미엄 중형 세단입니다.'),
+('K3',         26000000,   'Kia',       '12.jpg', '가성비 좋은 세단입니다.'),
+('Corvette',   150000000,  'Chevrolet', '13.jpg', '미국 스포츠카입니다.'),
+('Mustang',    120000000,  'Ford',      '14.jpg', '머슬카의 상징입니다.'),
+('Seltos',     32000000,   'Kia',       '15.jpg', '소형 SUV 모델입니다.'),
+('Grandeur',   45000000,   'Hyundai',   '16.jpg', '준대형 세단입니다.'),
+('GHybrid',    50000000,   'Hyundai',   '17.jpg', '하이브리드 세단입니다.'),
+('G80',        90000000,   'Genesis',   '18.jpg', '프리미엄 대형 세단입니다.'),
+('Muscle',     80000000,   'Dodge',     '19.jpg', '강력한 머슬카입니다.'),
+('Coupe',      70000000,   'Chevrolet', '20.jpg', '클래식 쿠페 모델입니다.');

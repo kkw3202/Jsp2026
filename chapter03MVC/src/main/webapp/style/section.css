@@ -1,0 +1,59 @@
+@charset "UTF-8";
+/* Seksin ken panangisentro ti intero a screen */
+#section_wrap {
+    width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Titulo a HOME */
+.word {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* 4 a columnas a grid layout para kadagiti lugan */
+.carList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 a agpapada a columnas */
+    gap: 20px; /* Pagbaetan dagiti kahon */
+}
+
+/* Tunggal maysa a kahon ti lugan (Car Item Box) */
+.carItem {
+    border: 1px solid #dcdcdc;
+    background-color: #fff;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+/* Ladawan ti lugan */
+.carItem img {
+    width: 100%;
+    height: 140px; /* Agpapada a katayag ti ladawan */
+    object-fit: cover; /* Agbalin a napintas ti pannaka-fit ti ladawan */
+    margin-bottom: 12px;
+   
+}
+
+/* Nagan ti lugan */
+.carName {
+    font-size: 15px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+/* Presio ti lugan */
+.carPrice {
+    font-size: 14px;
+    color: #555;
+}
